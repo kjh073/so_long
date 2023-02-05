@@ -1,47 +1,69 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/01 15:37:00 by joohekim          #+#    #+#              #
+#    Updated: 2023/02/06 02:12:28 by jooheekim        ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
-
 CFLAGS = -Wall -Wextra -Werror
-MLX_DIR = mlx
+
+LIB_DIR = ./libft
+MLX_DIR = ./mlx
 FRAME_WORK_FLAGS = -framework OpenGL -framework Appkit
-HEADER_FLAGS = -Imlx/mlx.h
-LDFLAGS = -L.
-LIBS = -lmlx
-# LDFLAGS = -L./libft -L$(MLX_DIR)
-# LIBS = -lft -lmlx
+HEADER_FLAGS = -Imlx/mlx.h -Ilibft/libft.h
+LDFLAGS = -L$(LIB_DIR) -L$(MLX_DIR)
+LIBS = -lft -lmlx
+
 NAME = a.out 
-# SRC_DIR = 
 
-# ifdef compile_bonus
-# 	MAIN = main_bonus
-# else
-# 	MAIN = main
-# endif
+SRC_DIR = .
+SRCS = main.c check_map.c map_list.c dfs.c error_msg.c
+# SRCS_bonus = test_bonus.c
 
-SRCS = main.c
+ifdef compile_bonus
+	FILES = $(OBJ) $(OBJ_BONUS)
+else
+	FILES = $(OBJ)
+endif
 
-OBJS = $(SRCS:.c=.o) 
-# $(SRC_DIR)/$(MAIN).o
+OBJS = $(SRCS:.c=.o)
+OBJ_BONUS = $(SRCS_bonus:.c=.o)
 
-# LIBFT = libft/libft.a
+LIBFT = ./libft/libft.a
+LIBMLX = ./mlx/libmlx.dylib
 
 all: $(NAME)
 
-# bonus:
-# 	make compile_bonus=1 all
-
-$(NAME): $(OBJS) $(LIBFT) mlx/libmlx.dylib
+$(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 	$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(FRAME_WORK_FLAGS) -o $@
-	-install_name_tool -change libmlx.dylib ./$(MLX_DIR)/libmlx.dylib $(NAME)
+	install_name_tool -change libmlx.dylib mlx/libmlx.dylib $(NAME)
+	
 $(LIBFT):
-	cd libft && (make)
-mlx/libmlx.dylib:
-	cd mlx; make
+	cd $(LIB_DIR); $(MAKE)
+	
+$(LIBMLX):
+	cd mlx; $(MAKE)
+
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(MLX_DIR) $(HEADER_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(LIB_DIR) $(HEADER_FLAGS) -c $< -o $@
 clean:
-	rm -f $(OBJS) $(SRC_DIR)/main_bonus.o $(SRC_DIR)/main.o && cd libft && make clean
+	rm -f $(OBJS)
+	$(MAKE) -C $(MLX_DIR) clean
+	$(MAKE) -C $(LIB_DIR) clean
+	
 fclean: clean
-	rm -f $(NAME); cd libft; make fclean; cd ..; cd mlx; make clean
+	rm -f $(NAME) $(OBJS)
+	$(MAKE) -C $(LIB_DIR) fclean
+	
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus:
+	make compile_bonus=1 all
+
+.PHONY: all clean fclean re bonus
