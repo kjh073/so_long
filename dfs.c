@@ -6,7 +6,7 @@
 /*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:29:20 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/07 04:54:51 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/07 06:05:44 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ void	dfs(char **map, int x, int y, t_components *comp, int *result)
 	int ny;
 
 	i = 0;
-	if (comp->c == 0 && map[y][x] == 'E')
+	if (comp->c == 0 && map[y][x] == '2')
 	{
 		*result += 1;
 		return ;
 	}
+	if (map[y][x] != '2')
+		map[y][x] = '1';
 	while (i < 4)
 	{
 		nx = x + dx[i];
@@ -77,7 +79,7 @@ void	dfs(char **map, int x, int y, t_components *comp, int *result)
 		{
 			if (map[ny][nx] == 'C')
 				comp->c--;
-			if (map[ny][nx] == 'E')
+			else if (map[ny][nx] == 'E')
 				map[ny][nx] = '2';
 			else
 				map[ny][nx] = '1';
@@ -89,7 +91,8 @@ void	dfs(char **map, int x, int y, t_components *comp, int *result)
 				map[y][x] = 'E';
 				return ;
 			}
-			map[y][x] = '0';
+			if (map[ny][nx] != '2')
+				map[ny][nx] = '0';
 		}
 		i++;
 	}
@@ -117,6 +120,7 @@ t_param	*find_p(char **map)
 				return (pos);
 			i++;
 		}
+		j++;
 	}
 	return (0);
 }
@@ -162,9 +166,6 @@ int main()
 		return (0);
 	char *result = map_join();
 	char **map = map_split(result);
-	printf("%s", map[0]);
-	printf("%s", map[1]);
-	printf("%s", map[2]);
 	check_map_rect(map);
 	check_map_surround_1(map);
 	check_map_valid_comp(map);
