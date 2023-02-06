@@ -6,38 +6,39 @@
 /*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:29:20 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/06 02:10:11 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/07 04:54:51 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
-#include "get_next_line.h"
+#include "libft/libft.h"
+#include "libft/get_next_line.h"
+#include "libft/ft_printf.h"
 #include "so_long.h"
 
-// #include "error_msg.c"
-// #include "map_list.c"
-// #include "check_map.c"
-// #include "ft_printf.c"
-// #include "ft_print_char.c"
-// #include "ft_print_hex.c"
-// #include "ft_print_nbr.c"
-// #include "ft_print_str.c"
-// #include "ft_split.c"
-// #include "ft_strjoin.c"
-// #include "ft_strdup.c"
-// #include "ft_strlen.c"
-// #include "ft_substr.c"
-// #include "get_next_line.c"
-// #include "get_next_line_utils.c"
+#include "error_msg.c"
+#include "map_list.c"
+#include "check_map.c"
+#include "libft/ft_printf.c"
+#include "libft/ft_print_char.c"
+#include "libft/ft_print_hex.c"
+#include "libft/ft_print_nbr.c"
+#include "libft/ft_print_str.c"
+#include "libft/ft_split.c"
+#include "libft/ft_strjoin.c"
+#include "libft/ft_strdup.c"
+#include "libft/ft_strlen.c"
+#include "libft/ft_substr.c"
+#include "libft/get_next_line.c"
+#include "libft/get_next_line_utils.c"
 
 // void	dfs(t_map_info *par, t_check *check, int x, int y)
 // {
-// 	int	i;
-// 	int	nx;
-// 	int	ny;
+// 	int			i;
+// 	int			nx;
+// 	int			ny;
 // 	const int	dx[4] = {0, 0, -1, 1};
-// 	int	dy[4] = {1, -1, 0, 0};
+// 	const int	dy[4] = {1, -1, 0, 0};
 // 	check->map[x][y] = 1;
 // 	if (par->map[x][y] == 'C')
 // 		check->item_cnt--;
@@ -54,44 +55,67 @@
 // 	}
 // }
 
-int	dfs(char **map, t_param *player)
+void	dfs(char **map, int x, int y, t_components *comp, int *result)
 {
 	const int	dx[4] = {0, 0, -1, 1};
-	const int	dy[4] = {1, -1, 0, 0};
-	int			nx;
-	int			ny;
+	const int	dy[4] = {-1, 1, 0, 0};
 	int			i;
+	int nx;
+	int ny;
 
 	i = 0;
+	if (comp->c == 0 && map[y][x] == 'E')
+	{
+		*result += 1;
+		return ;
+	}
 	while (i < 4)
 	{
-		nx = player->x + dx[i];
-		ny = player->y + dy[i];
-		if (map[nx][ny] == '0' || map[nx][ny] == 'C')
-			dfs(map, player);
+		nx = x + dx[i];
+		ny = y + dy[i];
+		if (map[ny][nx] != '1' && map[ny][nx] != '2' && map[ny][nx])
+		{
+			if (map[ny][nx] == 'C')
+				comp->c--;
+			if (map[ny][nx] == 'E')
+				map[ny][nx] = '2';
+			else
+				map[ny][nx] = '1';
+			dfs(map, nx, ny, comp, result);
+			printf("x: %d, y: %d\n", x, y);
+			if (map[y][x] == '2' && comp->c == 0)
+			{
+				*result += 1;
+				map[y][x] = 'E';
+				return ;
+			}
+			map[y][x] = '0';
+		}
+		i++;
 	}
-	return (0);
+	return ;
 }
 
 t_param	*find_p(char **map)
 {
-	t_param	*player;
+	t_param	*pos;
 	int		i;
 	int		j;
 
-	i = 0;
-	player = (t_param *)malloc(sizeof(t_param));
-	if (!player)
-		return (0);
-	while (map[i])
+	j = 1;
+	pos = (t_param *)malloc(sizeof(t_param));
+	if (!pos)
+		return (NULL);
+	while (map[j])
 	{
-		j = 0;
-		while (map[i][j])
+		i = 1;
+		while (map[j][i])
 		{
-			player->x = i;
-			player->y = j;
-			if (map[i][j] == 'P')
-				return (player);
+			pos->x = i;
+			pos->y = j;
+			if (map[j][i] == 'P')
+				return (pos);
+			i++;
 		}
 	}
 	return (0);
@@ -99,28 +123,55 @@ t_param	*find_p(char **map)
 
 //p 위치 저장, return 해서 dfs경로 끝나면 c의 개수는 어떻게 측정할건지
 
-void	has_valid_path(char **map, t_param *player)
+void	has_valid_path(char **map, t_param *pos, t_components *comp)
 {
 	int	cnt;
+	int x = pos->x;
+	int y = pos->y;
 
-	cnt = dfs(map, player);
+	cnt = 0;
+	dfs(map, x, y, comp, &cnt);
+	printf("%d\n", cnt);
 	if (cnt <= 0)
 		print_err("Error\nThis map doesn't have a valid path.\n");
+	else
+		printf("has path");
+}
+
+void	param_init(t_param *param)
+{
+	param->x = 0;
+	param->y = 0;
+}
+
+void	components_init(t_components *comp)
+{
+	comp->p = 0;
+	comp->e = 0;
+	comp->c = 0;
 }
 
 int main()
 {
 	t_components	*comp;
-	
+	t_param			*pos;
+
 	comp = (t_components *)malloc(sizeof(t_components));
-	if (!comp)
+	pos = (t_param *)malloc(sizeof(t_param));
+	if (!comp || !pos)
 		return (0);
 	char *result = map_join();
 	char **map = map_split(result);
+	printf("%s", map[0]);
+	printf("%s", map[1]);
+	printf("%s", map[2]);
 	check_map_rect(map);
 	check_map_surround_1(map);
 	check_map_valid_comp(map);
+	components_init(comp);
 	check_map_comp_count(map, comp);
-	printf("%d, %d, %d\n", comp->c, comp->e, comp->p);
+	param_init(pos);
+	pos = find_p(map);
+	has_valid_path(map, pos, comp);
 	// system("leaks a.out");
 }

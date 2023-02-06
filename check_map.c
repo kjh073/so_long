@@ -6,13 +6,13 @@
 /*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:30:45 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/05 17:24:44 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/07 00:28:37 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
-#include "get_next_line.h"
+#include "libft/libft.h"
+#include "libft/get_next_line.h"
 #include "so_long.h"
 
 // #include "dfs.c"

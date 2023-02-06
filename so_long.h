@@ -6,7 +6,7 @@
 /*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/06 02:10:26 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/07 02:52:56 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	check_map_surround_1(char **map);
 void	check_map_valid_comp(char **map);
 void	check_map_comp_count(char **map, t_components *comp);
 void	print_err(char *str);
-int		dfs(char **map, t_param *player);
+void	dfs(char **map, int x, int y, t_components *comp, int *result);
 t_param	*find_p(char **map);
-void	has_valid_path(char **map, t_param *player);
+void	has_valid_path(char **map, t_param *pos, t_components *comp);
 
 #endif

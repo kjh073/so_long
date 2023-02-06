@@ -6,14 +6,14 @@
 /*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:28:39 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/05 16:14:54 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/07 04:23:33 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <stdio.h>
-#include "libft.h"
-#include "get_next_line.h"
+#include "libft/libft.h"
+#include "libft/get_next_line.h"
 #include "so_long.h"
 
 char	*map_join(void)
@@ -33,7 +33,8 @@ char	*map_join(void)
 		if (temp == NULL)
 			return (NULL);
 		free(s1);
-		free(result);
+		if (s1 != NULL)
+			free(result);
 		result = temp;
 	}
 	return (result);
