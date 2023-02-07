@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
+/*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:29:20 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/07 06:05:44 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/07 20:31:01 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 #include "libft/ft_printf.h"
 #include "so_long.h"
 
-#include "error_msg.c"
-#include "map_list.c"
-#include "check_map.c"
-#include "libft/ft_printf.c"
-#include "libft/ft_print_char.c"
-#include "libft/ft_print_hex.c"
-#include "libft/ft_print_nbr.c"
-#include "libft/ft_print_str.c"
-#include "libft/ft_split.c"
-#include "libft/ft_strjoin.c"
-#include "libft/ft_strdup.c"
-#include "libft/ft_strlen.c"
-#include "libft/ft_substr.c"
-#include "libft/get_next_line.c"
-#include "libft/get_next_line_utils.c"
+// #include "error_msg.c"
+// #include "map_list.c"
+// #include "check_map.c"
+// #include "libft/ft_printf.c"
+// #include "libft/ft_print_char.c"
+// #include "libft/ft_print_hex.c"
+// #include "libft/ft_print_nbr.c"
+// #include "libft/ft_print_str.c"
+// #include "libft/ft_split.c"
+// #include "libft/ft_strjoin.c"
+// #include "libft/ft_strdup.c"
+// #include "libft/ft_strlen.c"
+// #include "libft/ft_substr.c"
+// #include "libft/get_next_line.c"
+// #include "libft/get_next_line_utils.c"
 
 // void	dfs(t_map_info *par, t_check *check, int x, int y)
 // {
@@ -64,34 +64,36 @@ void	dfs(char **map, int x, int y, t_components *comp, int *result)
 	int ny;
 
 	i = 0;
-	if (comp->c == 0 && map[y][x] == '2')
-	{
-		*result += 1;
-		return ;
-	}
-	if (map[y][x] != '2')
+	// if (comp->c == 0 && map[y][x] == 'E')
+	// {
+	// 	*result += 1;
+	// 	printf("FIND PATH!!!!!!!!!!init dfs!!!!!!!!! RESULT : %d\n",*result);
+	// 	return ;
+	// }
+	// if (*result > 0)
+	// 	return ;
+	if (map[y][x] != 'E')
 		map[y][x] = '1';
 	while (i < 4)
 	{
 		nx = x + dx[i];
 		ny = y + dy[i];
-		if (map[ny][nx] != '1' && map[ny][nx] != '2' && map[ny][nx])
+		if (map[ny][nx] != '1' && map[ny][nx])
 		{
 			if (map[ny][nx] == 'C')
 				comp->c--;
-			else if (map[ny][nx] == 'E')
-				map[ny][nx] = '2';
-			else
+			else if (map[ny][nx] != 'E')
 				map[ny][nx] = '1';
 			dfs(map, nx, ny, comp, result);
-			printf("x: %d, y: %d\n", x, y);
-			if (map[y][x] == '2' && comp->c == 0)
+			if (comp->c == 0 && (map[y][x] == 'E' || map[ny][nx] == 'E'))
 			{
+				// if (*result <= 0)
 				*result += 1;
-				map[y][x] = 'E';
+				printf("FIND PATH!!!!!!!!!after dfs!!!!!!!!!!!!!!! RESULT : %d\n",*result);
 				return ;
 			}
-			if (map[ny][nx] != '2')
+			printf("x: %d, y: %d\n", x, y);
+			if (map[ny][nx] != 'E')
 				map[ny][nx] = '0';
 		}
 		i++;
@@ -146,6 +148,7 @@ void	param_init(t_param *param)
 {
 	param->x = 0;
 	param->y = 0;
+	param->steps = 0;
 }
 
 void	components_init(t_components *comp)
@@ -153,26 +156,4 @@ void	components_init(t_components *comp)
 	comp->p = 0;
 	comp->e = 0;
 	comp->c = 0;
-}
-
-int main()
-{
-	t_components	*comp;
-	t_param			*pos;
-
-	comp = (t_components *)malloc(sizeof(t_components));
-	pos = (t_param *)malloc(sizeof(t_param));
-	if (!comp || !pos)
-		return (0);
-	char *result = map_join();
-	char **map = map_split(result);
-	check_map_rect(map);
-	check_map_surround_1(map);
-	check_map_valid_comp(map);
-	components_init(comp);
-	check_map_comp_count(map, comp);
-	param_init(pos);
-	pos = find_p(map);
-	has_valid_path(map, pos, comp);
-	// system("leaks a.out");
 }

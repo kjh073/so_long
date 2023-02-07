@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
+/*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/07 02:52:56 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/07 20:38:12 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_param
 {
 	int	x;
 	int	y;
+	int	steps;
 }	t_param;
 
 typedef struct s_components
@@ -57,5 +58,7 @@ void	print_err(char *str);
 void	dfs(char **map, int x, int y, t_components *comp, int *result);
 t_param	*find_p(char **map);
 void	has_valid_path(char **map, t_param *pos, t_components *comp);
+void	param_init(t_param *param);
+void	components_init(t_components *comp);
 
 #endif
