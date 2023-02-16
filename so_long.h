@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 18:28:18 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:04:55 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_map
 	int		steps;
 }	t_map;
 
-// void	dfs(char **map, int x, int y, t_map *map_info, int *result);
 int		dfs(char **map, int x, int y, t_map *map_info);
 void	change(char **map, t_map *map_info);
 void	find_p(char **map, t_map *map_info);
@@ -56,9 +55,9 @@ void	find_e(char **map, t_map *map_info);
 void	has_valid_path(char **map, t_map *map_info);
 int		close_game(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
-void	set_img(t_vars v, t_map *m);
 void	mlx_img_init(t_vars *v, t_map *m);
-void	set_init_img(char **map, t_vars v);
+void	set_img_p_on_e(t_vars v);
+void	set_img(char **map, t_vars v);
 void	check_map_rect(char **map);
 void	check_map_surround_1(char **map);
 void	check_map_valid_comp(char **map);
