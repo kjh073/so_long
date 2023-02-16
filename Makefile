@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+         #
+#    By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 15:37:00 by joohekim          #+#    #+#              #
-#    Updated: 2023/02/07 04:14:26 by jooheekim        ###   ########.fr        #
+#    Updated: 2023/02/13 18:20:43 by joohekim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBS = -lft -lmlx
 NAME = a.out 
 
 SRC_DIR = .
-SRCS = main.c check_map.c map_list.c dfs.c error_msg.c
+SRCS = dfs_copy.c main.c map_check.c map_make.c move_p.c print_msg.c so_long_utils.c
 # SRCS_bonus = test_bonus.c
 
 ifdef compile_bonus
@@ -51,7 +51,7 @@ $(LIBMLX):
 	cd mlx; $(MAKE)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(LIB_DIR) $(HEADER_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(HEADER_FLAGS) -c $< -o $@
 clean:
 	rm -f $(OBJS)
 	$(MAKE) -C $(MLX_DIR) clean

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
+/*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:30:45 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/07 00:28:37 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/14 13:00:05 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,6 @@
 // #include "ft_substr.c"
 // #include "get_next_line.c"
 // #include "get_next_line_utils.c"
-
-int	count_c(char *str, char c)
-{
-	int	i;
-	int	cnt;
-
-	i = 0;
-	cnt = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			cnt++;
-		i++;
-	}
-	return (cnt);
-}
 
 void	check_map_rect(char **map)
 {
@@ -106,18 +90,35 @@ void	check_map_valid_comp(char **map)
 	}
 }
 
-void	check_map_comp_count(char **map, t_components *comp)
+void	check_map_comp_count(char **map, t_map *map_info)
 {
 	int	i;
 
 	i = 0;
 	while (map[i])
 	{
-		comp->p += count_c(map[i], 'P');
-		comp->e += count_c(map[i], 'E');
-		comp->c += count_c(map[i], 'C');
+		map_info->p += count_c(map[i], 'P');
+		map_info->e += count_c(map[i], 'E');
+		map_info->c += count_c(map[i], 'C');
 		i++;
 	}
-	if (comp->p != 1 || comp->e != 1 || comp->c < 1)
+	while (map[map_info->hei])
+	{
+		map_info->wid = 0;
+		while (map[map_info->hei][map_info->wid])
+			map_info->wid++;
+		map_info->hei++;
+	}
+	if (map_info->p != 1 || map_info->e != 1 || map_info->c < 1)
 		print_err("Error\nMap has to have P = 1, E = 1, C >= 1.\n");
+}
+
+void	check_map(char **map, t_map *map_info)
+{
+	check_map_rect(map);
+	check_map_surround_1(map);
+	map_info_init(map_info);
+	check_map_comp_count(map, map_info);
+	find_p(map, map_info);
+	has_valid_path(map, map_info);
 }
