@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:09:27 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 17:03:17 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:55:59 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,13 @@ int	key_hook(int keycode, t_vars *vars)
 	}
 	printf("x: %d, y: %d\n", vars->map_info->x, vars->map_info->y);
 	printf("steps: %d\n", vars->map_info->steps);
+	system("leaks a.out");
 	return (0);
 }
 
-void	set_img(t_vars v, t_map *m, char c)
+void	set_img(t_vars v, t_map *m)
 {
 	mlx_put_image_to_window(v.mlx, v.win, v.ground, m->x * 64, m->y * 64);
-	if (c == 'w')
-		m->y--;
-	else if (c == 'a')
-		m->x--;
-	else if (c == 's')
-		m->y++;
-	else if (c == 'd')
-		m->x++;
 	mlx_put_image_to_window(v.mlx, v.win, v.ground, m->x * 64, m->y * 64);
 	if (m->map[m->y][m->x] == 'E')
 		mlx_put_image_to_window(v.mlx, v.win, v.e, m->x * 64, m->y * 64);
@@ -111,6 +104,10 @@ void	set_init_img(char **map, t_vars v)
 
 	i = 0;
 	j = 0;
+
+	map[v.map_info->y][v.map_info->x] = 'P';
+	if (map[v.map_info->ey][v.map_info->ex] != 'P')
+		map[v.map_info->ey][v.map_info->ex] = 'E';
 	while (map[j])
 	{
 		i = 0;
@@ -125,6 +122,11 @@ void	set_init_img(char **map, t_vars v)
 				mlx_put_image_to_window(v.mlx, v.win, v.c, i * 64, j * 64);
 			else if (map[j][i] == 'E')
 				mlx_put_image_to_window(v.mlx, v.win, v.e, i * 64, j * 64);
+			if (map[v.map_info->y][v.map_info->x] == map[v.map_info->ey][v.map_info->ex])
+			{
+				mlx_put_image_to_window(v.mlx, v.win, v.e, v.map_info->x * 64, v.map_info->y * 64);
+				mlx_put_image_to_window(v.mlx, v.win, v.p, v.map_info->x * 64, v.map_info->y * 64);
+			}
 			i++;
 		}
 		j++;
@@ -152,6 +154,7 @@ int	main(void)
 	map_info_init(vars.map_info);
 	check_map_comp_count(vars.map_info->map, vars.map_info);
 	find_p(vars.map_info->map, vars.map_info);
+	find_e(vars.map_info->map, vars.map_info);
 	printf("e: %d, c: %d, p: %d, wid: %d, hei: %d, x: %d, y: %d, s: %d\n",
 		vars.map_info->e, vars.map_info->c, vars.map_info->p, vars.map_info->wid, vars.map_info->hei,
 		vars.map_info->x, vars.map_info->y, vars.map_info->steps);
@@ -163,6 +166,7 @@ int	main(void)
 	mlx_hook(vars.win, X_EVENT_KEY_PRESS, 0, key_hook, &vars);
 	// mlx_loop_hook(vars.win, main_loop, &vars);
 	mlx_loop(vars.mlx);
+	
 	return (0);
 }
 

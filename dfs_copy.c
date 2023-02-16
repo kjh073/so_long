@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:29:20 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 14:40:42 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:26:51 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,27 @@ void	find_p(char **map, t_map *map_info)
 			map_info->x = i;
 			map_info->y = j;
 			if (map[j][i] == 'P')
+				return ;
+			i++;
+		}
+		j++;
+	}
+}
+
+void	find_e(char **map, t_map *map_info)
+{
+	int		i;
+	int		j;
+
+	j = 1;
+	while (map[j])
+	{
+		i = 1;
+		while (map[j][i])
+		{
+			map_info->ex = i;
+			map_info->ey = j;
+			if (map[j][i] == 'E')
 				return ;
 			i++;
 		}

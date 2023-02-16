@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:37:33 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/13 20:00:42 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:35:33 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void	map_info_init(t_map *map_info)
 	map_info->hei = 0;
 	map_info->x = 0;
 	map_info->y = 0;
+	map_info->ex = 0;
+	map_info->ey = 0;
 	map_info->steps = 0;
 }
