@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:53:53 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/13 14:53:44 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:26:29 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	print_err(char *str)
 int	game_clear(void)
 {
 	ft_printf("GAME CLEAR!");
+	exit(0);
 	return (0);
 }

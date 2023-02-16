@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:09:27 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 15:56:04 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:03:17 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@
 #include "mlx/mlx.h"
 // #include <fcntl.h>
 
-#include "print_msg.c"
-#include "map_make.c"
-#include "map_check.c"
-#include "dfs_copy.c"
-#include "move_p.c"
-#include "so_long_utils.c"
-#include "libft/ft_printf.c"
-#include "libft/ft_print_char.c"
-#include "libft/ft_print_hex.c"
-#include "libft/ft_print_nbr.c"
-#include "libft/ft_print_str.c"
-#include "libft/ft_split.c"
-#include "libft/ft_strjoin.c"
-#include "libft/ft_strdup.c"
-#include "libft/ft_strlen.c"
-#include "libft/ft_substr.c"
-#include "libft/get_next_line.c"
-#include "libft/get_next_line_utils.c"
+// #include "print_msg.c"
+// #include "map_make.c"
+// #include "map_check.c"
+// #include "dfs_copy.c"
+// #include "move_p.c"
+// #include "so_long_utils.c"
+// #include "libft/ft_printf.c"
+// #include "libft/ft_print_char.c"
+// #include "libft/ft_print_hex.c"
+// #include "libft/ft_print_nbr.c"
+// #include "libft/ft_print_str.c"
+// #include "libft/ft_split.c"
+// #include "libft/ft_strjoin.c"
+// #include "libft/ft_strdup.c"
+// #include "libft/ft_strlen.c"
+// #include "libft/ft_substr.c"
+// #include "libft/get_next_line.c"
+// #include "libft/get_next_line_utils.c"
 
 int	close_game(t_vars *vars)
 {
@@ -45,25 +45,26 @@ int	close_game(t_vars *vars)
 	return (0);
 }
 
-int	key_hook(int keycode, t_vars vars)
+int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_ESC)
 		exit(0);
 	else if (keycode == KEY_W || keycode == KEY_A
 		|| keycode == KEY_S || keycode == KEY_D)
 	{
-		printf("key_hook : %d %d\n", vars.map_info->x, vars.map_info->y);
+		printf("key_hook : %d %d\n", vars->map_info->x, vars->map_info->y);
+		printf("key_hook p, c: %d %d\n", vars->map_info->p, vars->map_info->c);
 		if (keycode == KEY_W)
-			move_w(vars, vars.map_info);
+			move_w(*vars, vars->map_info);
 		else if (keycode == KEY_A)
-			move_a(vars, vars.map_info);
+			move_a(*vars, vars->map_info);
 		else if (keycode == KEY_S)
-			move_s(vars, vars.map_info);
+			move_s(*vars, vars->map_info);
 		else if (keycode == KEY_D)
-			move_d(vars, vars.map_info);
+			move_d(*vars, vars->map_info);
 	}
-	printf("x: %d, y: %d\n", vars.map_info->x, vars.map_info->y);
-	printf("steps: %d\n", vars.map_info->steps);
+	printf("x: %d, y: %d\n", vars->map_info->x, vars->map_info->y);
+	printf("steps: %d\n", vars->map_info->steps);
 	return (0);
 }
 
@@ -71,11 +72,11 @@ void	set_img(t_vars v, t_map *m, char c)
 {
 	mlx_put_image_to_window(v.mlx, v.win, v.ground, m->x * 64, m->y * 64);
 	if (c == 'w')
-		m->y++;
+		m->y--;
 	else if (c == 'a')
 		m->x--;
 	else if (c == 's')
-		m->y--;
+		m->y++;
 	else if (c == 'd')
 		m->x++;
 	mlx_put_image_to_window(v.mlx, v.win, v.ground, m->x * 64, m->y * 64);
@@ -130,6 +131,11 @@ void	set_init_img(char **map, t_vars v)
 	}
 }
 
+// int main_loop(t_vars *vars)
+// {
+
+// }
+
 int	main(void)
 {
 	t_vars	vars;
@@ -155,6 +161,7 @@ int	main(void)
 	printf("main : %d %d\n", vars.map_info->x, vars.map_info->y);
 	mlx_hook(vars.win, X_EVENT_KEY_EXIT, 0, close_game, &vars);
 	mlx_hook(vars.win, X_EVENT_KEY_PRESS, 0, key_hook, &vars);
+	// mlx_loop_hook(vars.win, main_loop, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 15:05:31 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:56:30 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	change(char **map, t_map *map_info);
 void	find_p(char **map, t_map *map_info);
 void	has_valid_path(char **map, t_map *map_info);
 int		close_game(t_vars *vars);
-int		key_hook(int keycode, t_vars vars);
+int		key_hook(int keycode, t_vars *vars);
 void	set_img(t_vars v, t_map *m, char c);
 void	mlx_img_init(t_vars *v, t_map *m);
 void	set_init_img(char **map, t_vars v);

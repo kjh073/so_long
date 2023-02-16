@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 19:22:08 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 15:49:51 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:24:50 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,46 @@
 
 void	move_w(t_vars v, t_map *m)
 {
-	if (m->map[m->y + 1][m->x] != '1' || m->map[m->y + 1][m->x])
+	if (m->map[m->y - 1][m->x] != '1')
 	{
-		if (m->map[m->y + 1][m->x] == 'C')
+		if (m->map[m->y - 1][m->x] == 'C')
 			m->c--;
-		if (m->map[m->y + 1][m->x] == 'E' || m->c == 0)
+		if (m->map[m->y - 1][m->x] == 'E' && m->c == 0)
 			game_clear();
 		m->steps++;
 		printf("steps: %d\n", m->steps);
+		printf("steps: %d\n", v.map_info->x);
+		printf("c: %d\n", v.map_info->c);
 		set_img(v, m, 'w');
 	}
 }
 
 void	move_a(t_vars v, t_map *m)
 {
-	if (m->map[m->x - 1][m->x] != '1' || m->map[m->x - 1][m->x])
+	if (m->map[m->y][m->x - 1] != '1')
 	{
-		if (m->map[m->x - 1][m->x] == 'C')
+		if (m->map[m->y][m->x - 1] == 'C')
 			m->c--;
-		if (m->map[m->x - 1][m->x] == 'E' || m->c == 0)
+		if (m->map[m->y][m->x - 1] == 'E' && m->c == 0)
 			game_clear();
 		m->steps++;
 		printf("steps: %d\n", m->steps);
+		printf("c: %d\n", v.map_info->c);
 		set_img(v, m, 'a');
 	}
 }
 
 void	move_s(t_vars v, t_map *m)
 {
-	if (m->map[m->y - 1][m->x] != '1' || m->map[m->y - 1][m->x])
+	if (m->map[m->y + 1][m->x] != '1')
 	{
-		if (m->map[m->y - 1][m->x] == 'C')
+		if (m->map[m->y + 1][m->x] == 'C')
 			m->c--;
-		if (m->map[m->y - 1][m->x] == 'E' || m->c == 0)
+		if (m->map[m->y + 1][m->x] == 'E' && m->c == 0)
 			game_clear();
 		m->steps++;
 		printf("steps: %d\n", m->steps);
+		printf("c: %d\n", v.map_info->c);
 		set_img(v, m, 's');
 	}
 }
@@ -58,14 +62,15 @@ void	move_s(t_vars v, t_map *m)
 void	move_d(t_vars v, t_map *m)
 {
 	printf("key_hook : %d %d\n", v.map_info->x, v.map_info->y);
-	if (m->map[m->x + 1][m->x] != '1' || m->map[m->x + 1][m->x])
+	if (m->map[m->y][m->x + 1] != '1')
 	{
-		if (m->map[m->x + 1][m->x] == 'C')
+		if (m->map[m->y][m->x + 1] == 'C')
 			m->c--;
-		if (m->map[m->x + 1][m->x] == 'E' || m->c == 0)
+		if (m->map[m->y][m->x + 1] == 'E' && m->c == 0)
 			game_clear();
 		m->steps++;
 		printf("steps: %d\n", m->steps);
+		printf("c: %d\n", v.map_info->c);
 		set_img(v, m, 'd');
 	}
 }
