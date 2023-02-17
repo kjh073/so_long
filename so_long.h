@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:06:24 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:09:30 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_map
 
 void	dfs(int x, int y, t_map *map_info);
 void	has_valid_path(t_map *map_info);
-void	close_game(t_vars *vars);
+int		close_game(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 void	mlx_img_init(t_vars *v, t_map *m);
 void	set_img_p_on_e(t_vars v);

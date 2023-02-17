@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:06:19 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:06:11 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:09:19 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "mlx/mlx.h"
 #include <stdlib.h>
 
-void	close_game(t_vars *vars)
+int	close_game(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
 	exit(0);

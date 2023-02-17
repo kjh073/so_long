@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:04:46 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:05:36 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:09:58 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	mlx_img_init(t_vars *v, t_map *m)
 	v->ground = mlx_xpm_file_to_image(
 			v->mlx, "textures/beach_ground.xpm", &wid, &hei);
 	v->wall = mlx_xpm_file_to_image(
-			v->mlx, "textures/bush copy.xpm", &wid, &hei);
+			v->mlx, "textures/bush.xpm", &wid, &hei);
 	v->p = mlx_xpm_file_to_image(
 			v->mlx, "textures/Haley_front.xpm", &wid, &hei);
 	v->c = mlx_xpm_file_to_image(
