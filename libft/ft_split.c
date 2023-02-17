@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
+/*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:35:22 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/07 00:31:28 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/17 16:48:59 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_memfree(char **result, int k)
+int	ft_memfree(char **result, int k)
 {
 	while (k >= 0)
 	{
