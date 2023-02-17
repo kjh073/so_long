@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:04:46 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:09:58 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:21:09 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,28 @@ void	mlx_img_init(t_vars *v, t_map *m)
 			v->mlx, "textures/beach_ground.xpm", &wid, &hei);
 	v->wall = mlx_xpm_file_to_image(
 			v->mlx, "textures/bush.xpm", &wid, &hei);
-	v->p = mlx_xpm_file_to_image(
+	v->p_w = mlx_xpm_file_to_image(
+			v->mlx, "textures/Haley_back.xpm", &wid, &hei);
+	v->p_a = mlx_xpm_file_to_image(
+			v->mlx, "textures/Haley_left.xpm", &wid, &hei);
+	v->p_s = mlx_xpm_file_to_image(
 			v->mlx, "textures/Haley_front.xpm", &wid, &hei);
+	v->p_d = mlx_xpm_file_to_image(
+			v->mlx, "textures/Haley_right.xpm", &wid, &hei);
 	v->c = mlx_xpm_file_to_image(
 			v->mlx, "textures/star.xpm", &wid, &hei);
 	v->e = mlx_xpm_file_to_image(
 			v->mlx, "textures/teleport.xpm", &wid, &hei);
 }
 
-void	set_img_p_on_e(t_vars v)
+void	set_img_p_on_e(t_vars v, char d)
 {
 	mlx_put_image_to_window(v.mlx, v.win, v.e,
 		v.map_info->x * 64, v.map_info->y * 64);
-	mlx_put_image_to_window(v.mlx, v.win, v.p,
-		v.map_info->x * 64, v.map_info->y * 64);
+	set_img_p(v, d, v.map_info->x, v.map_info->y);
 }
 
-void	set_img(char **map, t_vars v)
+void	set_img(char **map, t_vars v, char d)
 {
 	int	i;
 	int	j;
@@ -55,16 +60,28 @@ void	set_img(char **map, t_vars v)
 			if (map[j][i] == '1')
 				mlx_put_image_to_window(v.mlx, v.win, v.wall, i * 64, j * 64);
 			else if (map[j][i] == 'P')
-				mlx_put_image_to_window(v.mlx, v.win, v.p, i * 64, j * 64);
+				set_img_p(v, d, i, j);
 			else if (map[j][i] == 'C')
 				mlx_put_image_to_window(v.mlx, v.win, v.c, i * 64, j * 64);
 			else if (map[j][i] == 'E')
 				mlx_put_image_to_window(v.mlx, v.win, v.e, i * 64, j * 64);
 			if (map[v.map_info->y][v.map_info->x]
 				== map[v.map_info->ey][v.map_info->ex])
-				set_img_p_on_e(v);
+				set_img_p_on_e(v, d);
 			i++;
 		}
 		j++;
 	}
+}
+
+void	set_img_p(t_vars v, char d, int i, int j)
+{
+	if (d == 'w')
+		mlx_put_image_to_window(v.mlx, v.win, v.p_w, i * 64, j * 64);
+	else if (d == 'a')
+		mlx_put_image_to_window(v.mlx, v.win, v.p_a, i * 64, j * 64);
+	else if (d == 's')
+		mlx_put_image_to_window(v.mlx, v.win, v.p_s, i * 64, j * 64);
+	else if (d == 'd')
+		mlx_put_image_to_window(v.mlx, v.win, v.p_d, i * 64, j * 64);
 }

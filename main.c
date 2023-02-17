@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:09:27 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 16:59:24 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:18:42 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(void)
 	find_p(vars.map_info->map, vars.map_info);
 	find_e(vars.map_info->map, vars.map_info);
 	mlx_img_init(&vars, vars.map_info);
-	set_img(vars.map_info->map, vars);
+	set_img(vars.map_info->map, vars, 's');
 	mlx_hook(vars.win, X_EVENT_KEY_EXIT, 0, close_game, &vars);
 	mlx_hook(vars.win, X_EVENT_KEY_PRESS, 0, key_hook, &vars);
 	mlx_loop(vars.mlx);

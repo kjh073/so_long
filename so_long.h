@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:09:30 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:20:29 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ typedef struct s_vars
 	void			*win;
 	void			*wall;
 	void			*ground;
-	void			*p;
+	void			*p_w;
+	void			*p_a;
+	void			*p_s;
+	void			*p_d;
 	void			*c;
 	void			*e;
 	struct s_map	*map_info;
@@ -54,8 +57,8 @@ void	has_valid_path(t_map *map_info);
 int		close_game(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 void	mlx_img_init(t_vars *v, t_map *m);
-void	set_img_p_on_e(t_vars v);
-void	set_img(char **map, t_vars v);
+void	set_img_p_on_e(t_vars v, char d);
+void	set_img(char **map, t_vars v, char d);
 void	check_map_rect(char **map);
 void	check_map_surround_1(char **map);
 void	check_map_valid_comp(char **map);
@@ -75,5 +78,6 @@ void	find_p(char **map, t_map *map_info);
 void	find_e(char **map, t_map *map_info);
 int		make_map(char **result, t_map *map_info);
 int		cnt_map_hei(t_map *map_info);
+void	set_img_p(t_vars v, char d, int i, int j);
 
 #endif
