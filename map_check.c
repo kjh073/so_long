@@ -6,30 +6,11 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:30:45 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:02:56 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:24:18 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
 #include "so_long.h"
-
-// #include "dfs.c"
-// #include "error_msg.c"
-// #include "map_list.c"
-// #include "ft_printf.c"
-// #include "ft_print_char.c"
-// #include "ft_print_hex.c"
-// #include "ft_print_nbr.c"
-// #include "ft_print_str.c"
-// #include "ft_split.c"
-// #include "ft_strjoin.c"
-// #include "ft_strdup.c"
-// #include "ft_strlen.c"
-// #include "ft_substr.c"
-// #include "get_next_line.c"
-// #include "get_next_line_utils.c"
 
 void	check_map_rect(char **map)
 {
@@ -117,6 +98,7 @@ void	check_map(char **map, t_map *map_info)
 {
 	check_map_rect(map);
 	check_map_surround_1(map);
+	check_map_valid_comp(map);
 	map_info_init(map_info);
 	check_map_comp_count(map, map_info);
 	find_p(map, map_info);

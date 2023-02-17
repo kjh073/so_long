@@ -6,7 +6,7 @@
 #    By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 15:37:00 by joohekim          #+#    #+#              #
-#    Updated: 2023/02/17 17:04:18 by joohekim         ###   ########.fr        #
+#    Updated: 2023/02/17 18:49:50 by joohekim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,16 +25,8 @@ NAME = a.out
 SRC_DIR = .
 SRCS = dfs.c main.c map_check.c map_make.c move_p.c print_msg.c  \
 	so_long_utils.c set_img.c mlx_hook.c
-# SRCS_bonus = test_bonus.c
-
-ifdef compile_bonus
-	FILES = $(OBJ) $(OBJ_BONUS)
-else
-	FILES = $(OBJ)
-endif
 
 OBJS = $(SRCS:.c=.o)
-OBJ_BONUS = $(SRCS_bonus:.c=.o)
 
 LIBFT = ./libft/libft.a
 LIBMLX = ./mlx/libmlx.dylib
@@ -64,7 +56,4 @@ fclean: clean
 	
 re: fclean all
 
-bonus:
-	make compile_bonus=1 all
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

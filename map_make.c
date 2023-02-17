@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:28:39 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:00:49 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:46:54 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	cnt_map_hei(t_map *map_info)
 	return (i);
 }
 
-char	*map_join(void)
+char	*map_join(char *file)
 {
 	int		fd;
 	char	*result;
@@ -33,7 +33,7 @@ char	*map_join(void)
 	char	*temp;
 
 	s1 = "";
-	fd = open("maps/map.ber", O_RDONLY);
+	fd = open(file, O_RDONLY);
 	result = get_next_line(fd);
 	if (result == NULL)
 		return (NULL);
@@ -61,11 +61,23 @@ char	**map_split(char *map)
 	return (result);
 }
 
-int	make_map(char **result, t_map *map_info)
+char	*make_file_name(char *file_name)
 {
-	*result = map_join();
-	if (*result == NULL)
+	char	*file;
+
+	file = ft_strjoin("maps/", file_name);
+	if (file == NULL)
+		return (0);
+	return (file);
+}
+
+int	make_map(char **result, t_map *map_info, char *file_name)
+{
+	file_name = make_file_name(file_name);
+	if (*file_name == '\0')
 		return (-1);
+	*result = map_join(file_name);
+	free(file_name);
 	map_info->map = map_split(*result);
 	if (map_info->map == NULL)
 	{

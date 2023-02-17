@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:20:29 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:45:37 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,21 @@ void	check_map_surround_1(char **map);
 void	check_map_valid_comp(char **map);
 void	check_map_comp_count(char **map, t_map *map_info);
 void	check_map(char **map, t_map *map_info);
-char	*map_join(void);
+char	*map_join(char *file_name);
 char	**map_split(char *map);
 void	move_w(t_vars v, t_map *m);
 void	move_a(t_vars v, t_map *m);
 void	move_s(t_vars v, t_map *m);
 void	move_d(t_vars v, t_map *m);
 void	print_err(char *str);
-int		game_clear(void);
+void	game_clear(void);
 int		count_c(char *str, char c);
 void	map_info_init(t_map *map_info);
 void	find_p(char **map, t_map *map_info);
 void	find_e(char **map, t_map *map_info);
-int		make_map(char **result, t_map *map_info);
+int		make_map(char **result, t_map *map_info, char *file_name);
 int		cnt_map_hei(t_map *map_info);
 void	set_img_p(t_vars v, char d, int i, int j);
+char	*make_file_name(char *file_name);
 
 #endif

@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bfs.c                                              :+:      :+:    :+:   */
+/*   dfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:29:20 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:03:53 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:24:09 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include "libft/ft_printf.h"
 #include "so_long.h"
-
-// #include "error_msg.c"
-// #include "map_list.c"
-// #include "check_map.c"
-// #include "libft/ft_printf.c"
-// #include "libft/ft_print_char.c"
-// #include "libft/ft_print_hex.c"
-// #include "libft/ft_print_nbr.c"
-// #include "libft/ft_print_str.c"
-// #include "libft/ft_split.c"
-// #include "libft/ft_strjoin.c"
-// #include "libft/ft_strdup.c"
-// #include "libft/ft_strlen.c"
-// #include "libft/ft_substr.c"
-// #include "libft/get_next_line.c"
-// #include "libft/get_next_line_utils.c"
 
 void	dfs(int x, int y, t_map *map_info)
 {

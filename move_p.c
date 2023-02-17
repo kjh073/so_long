@@ -6,12 +6,12 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 19:22:08 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 17:15:47 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:22:51 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
+#include "libft/ft_printf.h"
 
 void	move_w(t_vars v, t_map *m)
 {
@@ -27,7 +27,7 @@ void	move_w(t_vars v, t_map *m)
 			m->map[m->y][m->x] = '0';
 		m->y--;
 		m->steps++;
-		printf("%d steps\n", m->steps);
+		ft_printf("%d steps\n", m->steps);
 		set_img(m->map, v, 'w');
 	}
 }
@@ -46,7 +46,7 @@ void	move_a(t_vars v, t_map *m)
 			m->map[m->y][m->x] = '0';
 		m->x--;
 		m->steps++;
-		printf("%d steps\n", m->steps);
+		ft_printf("%d steps\n", m->steps);
 		set_img(m->map, v, 'a');
 	}
 }
@@ -65,7 +65,7 @@ void	move_s(t_vars v, t_map *m)
 			m->map[m->y][m->x] = '0';
 		m->y++;
 		m->steps++;
-		printf("%d steps\n", m->steps);
+		ft_printf("%d steps\n", m->steps);
 		set_img(m->map, v, 's');
 	}
 }
@@ -84,7 +84,7 @@ void	move_d(t_vars v, t_map *m)
 			m->map[m->y][m->x] = '0';
 		m->x++;
 		m->steps++;
-		printf("%d steps\n", m->steps);
+		ft_printf("%d steps\n", m->steps);
 		set_img(m->map, v, 'd');
 	}
 }
