@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dfs_copy.c                                         :+:      :+:    :+:   */
+/*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:29:20 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 20:09:49 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:37:38 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,105 +32,37 @@
 // #include "libft/get_next_line.c"
 // #include "libft/get_next_line_utils.c"
 
-
-int	dfs(char **map, int x, int y, t_map *map_info)
+void	bfs(char **map, int x, int y, t_map *map_info)
 {
-	int i = 0;
-	int nx;
-	int ny;
-	
-	nx = x;
-	while (1)
-	{
-		nx += 1;
-		if (map[y][nx] == '1' || map[y][nx] == '3')
-			break ;
-		if (map[y][nx] == 'C')
-			map_info->c--;
-		if (map[y][nx] == 'E')
-			map_info->e--;
-		map[y][nx] = '3';
-		i++;
-	}
-	nx = x;
-	while (1)
-	{
-		nx -= 1;
-		if (map[y][nx] == '1' || map[y][nx] == '3')
-			break ;
-		if (map[y][nx] == 'C')
-			map_info->c--;
-		if (map[y][nx] == 'E')
-			map_info->e--;
-		map[y][nx] = '3';
-		i++;
-	}
-	ny = y;
-	while (1)
-	{
-		ny += 1;
-		if (map[ny][x] == '1' || map[ny][x] == '3')
-			break ;
-		if (map[ny][x] == 'C')
-			map_info->c--;
-		if (map[ny][x] == 'E')
-			map_info->e--;
-		map[ny][x] = '3';
-		i++;
-	}
-	ny = y;
-	while (1)
-	{
-		ny -= 1;
-		if (map[ny][x] == '1' || map[ny][x] == '3')
-			break ;
-		if (map[ny][x] == 'C')
-			map_info->c--;
-		if (map[ny][x] == 'E')
-			map_info->e--;
-		map[ny][x] = '3';
-		i++;
-	}
-	return (i);
-}
+	const int	dx[4] = {0, 0, -1, 1};
+	const int	dy[4] = {-1, 1, 0, 0};
+	int			nx;
+	int			ny;
+	int			i;
 
-void	change(char **map, t_map *map_info)
-{
-	int	n;
-	int	m;
-	int	i;
-
-	while (1)
+	i = 0;
+	map[y][x] = '3';
+	while (i < 4)
 	{
-		i = 0;
-		m = 0;
-		while (map[m])
+		nx = x + dx[i];
+		ny = y + dy[i];
+		if (map[ny][nx] != '1' && map[ny][nx] != '3')
 		{
-			n = 0;
-			while (map[m][n])
-			{
-				if (map[m][n] == '3' || map[m][n] == 'P')
-				{
-					if (dfs(map, n, m, map_info) > 0)
-						i++;
-				}
-				n++;
-			}
-			m++;
+			if (map[ny][nx] == 'C')
+				map_info->c--;
+			if (map[ny][nx] == 'E')
+				map_info->e--;
+			bfs(map, nx, ny, map_info);
+			if (map_info->c == 0 && map_info->e == 0)
+				return ;
 		}
-		if (i == 0)
-			break ;
+		i++;
 	}
 }
 
 void	has_valid_path(char **map, t_map *map_info)
 {
-	int	x;
-	int	y;
-
-	x = map_info->x;
-	y = map_info->y;
-	change(map, map_info);
+	bfs(map, map_info->x, map_info->y, map_info);
 	if (map_info->c != 0 || map_info->e != 0)
 		print_err("Error\nThis map doesn't have a valid path.\n");
 	else

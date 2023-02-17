@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 20:04:55 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:37:13 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_vars
 typedef struct s_map
 {
 	char	**map;
+	char	**map_check;
 	int		p;
 	int		e;
 	int		c;
@@ -48,10 +49,7 @@ typedef struct s_map
 	int		steps;
 }	t_map;
 
-int		dfs(char **map, int x, int y, t_map *map_info);
-void	change(char **map, t_map *map_info);
-void	find_p(char **map, t_map *map_info);
-void	find_e(char **map, t_map *map_info);
+void	bfs(char **map, int x, int y, t_map *map_info);
 void	has_valid_path(char **map, t_map *map_info);
 int		close_game(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
@@ -73,5 +71,7 @@ void	print_err(char *str);
 int		game_clear(void);
 int		count_c(char *str, char c);
 void	map_info_init(t_map *map_info);
+void	find_p(char **map, t_map *map_info);
+void	find_e(char **map, t_map *map_info);
 
 #endif

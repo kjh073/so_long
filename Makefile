@@ -6,7 +6,7 @@
 #    By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 15:37:00 by joohekim          #+#    #+#              #
-#    Updated: 2023/02/13 18:20:43 by joohekim         ###   ########.fr        #
+#    Updated: 2023/02/17 15:12:53 by joohekim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBS = -lft -lmlx
 NAME = a.out 
 
 SRC_DIR = .
-SRCS = dfs_copy.c main.c map_check.c map_make.c move_p.c print_msg.c so_long_utils.c
+SRCS = bfs.c main.c map_check.c map_make.c move_p.c print_msg.c so_long_utils.c
 # SRCS_bonus = test_bonus.c
 
 ifdef compile_bonus

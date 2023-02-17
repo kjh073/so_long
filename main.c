@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:09:27 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 20:03:36 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:50:55 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@
 #include "so_long.h"
 #include <stdlib.h>
 #include "mlx/mlx.h"
-// #include <fcntl.h>
 
 // #include "print_msg.c"
 // #include "map_make.c"
 // #include "map_check.c"
-// #include "dfs_copy.c"
+// #include "bfs.c"
 // #include "move_p.c"
 // #include "so_long_utils.c"
 // #include "libft/ft_printf.c"
@@ -134,7 +133,11 @@ int	main(void)
 	vars.map_info->map = map_split(result);
 	map_check = map_split(result);
 	check_map(map_check, vars.map_info);
+
 	map_info_init(vars.map_info);
+	int a= 0;
+	while (vars.map_info->map[a])
+		printf("%s\n", vars.map_info->map[a++]);
 	check_map_comp_count(vars.map_info->map, vars.map_info);
 	find_p(vars.map_info->map, vars.map_info);
 	find_e(vars.map_info->map, vars.map_info);
@@ -150,25 +153,3 @@ int	main(void)
 	mlx_loop(vars.mlx);
 	return (0);
 }
-
-// int main()
-// {
-// 	t_map	*map_info;
-// 	t_pos			*pos;
-
-// 	map_info = (t_map *)malloc(sizeof(t_map));
-// 	pos = (t_pos *)malloc(sizeof(t_pos));
-// 	if (!map_info || !pos)
-// 		return (0);
-// 	char *result = map_join();
-// 	char **map = map_split(result);
-// 	check_map_rect(map);
-// 	check_map_surround_1(map);
-// 	check_map_valid_map_info(map);
-// 	map_infoonents_init(map_info);
-// 	check_map_map_info_count(map, map_info);
-// 	pos_init(pos);
-// 	pos = find_p(map);
-// 	has_valid_path(map, pos, map_info);
-// 	// system("leaks a.out");
-// }

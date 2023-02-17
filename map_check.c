@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:30:45 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/16 18:27:32 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:45:20 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	check_map_comp_count(char **map, t_map *map_info)
 			map_info->wid++;
 		map_info->hei++;
 	}
+	printf("p: %d, e: %d, e: %d\n", map_info->p, map_info->e, map_info->c);
 	if (map_info->p != 1 || map_info->e != 1 || map_info->c < 1)
 		print_err("Error\nMap has to have P = 1, E = 1, C >= 1.\n");
 }
@@ -118,7 +119,9 @@ void	check_map(char **map, t_map *map_info)
 	check_map_rect(map);
 	check_map_surround_1(map);
 	map_info_init(map_info);
+	printf("??\n");
 	check_map_comp_count(map, map_info);
+	printf("??????");
 	find_p(map, map_info);
 	has_valid_path(map, map_info);
 }
