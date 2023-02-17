@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 18:45:37 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:32:20 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_vars
 	void			*win;
 	void			*wall;
 	void			*ground;
+	void			*ground_b;
 	void			*p_w;
 	void			*p_a;
 	void			*p_s;
@@ -79,6 +80,7 @@ void	find_e(char **map, t_map *map_info);
 int		make_map(char **result, t_map *map_info, char *file_name);
 int		cnt_map_hei(t_map *map_info);
 void	set_img_p(t_vars v, char d, int i, int j);
+void	set_img_ground(t_vars v, int i, int j);
 char	*make_file_name(char *file_name);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:04:46 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 18:24:37 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:34:25 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	mlx_img_init(t_vars *v, t_map *m)
 	v->win = mlx_new_window(v->mlx, m->wid * 64, m->hei * 64, "so_long");
 	v->ground = mlx_xpm_file_to_image(
 			v->mlx, "textures/beach_ground.xpm", &wid, &hei);
+	v->ground_b = mlx_xpm_file_to_image(
+			v->mlx, "textures/beach_ground_b.xpm", &wid, &hei);
 	v->wall = mlx_xpm_file_to_image(
 			v->mlx, "textures/bush.xpm", &wid, &hei);
 	v->p_w = mlx_xpm_file_to_image(
@@ -56,7 +58,7 @@ void	set_img(char **map, t_vars v, char d)
 		i = 0;
 		while (map[j][i])
 		{
-			mlx_put_image_to_window(v.mlx, v.win, v.ground, i * 64, j * 64);
+			set_img_ground(v, i, j);
 			if (map[j][i] == '1')
 				mlx_put_image_to_window(v.mlx, v.win, v.wall, i * 64, j * 64);
 			else if (map[j][i] == 'P')
@@ -84,4 +86,11 @@ void	set_img_p(t_vars v, char d, int i, int j)
 		mlx_put_image_to_window(v.mlx, v.win, v.p_s, i * 64, j * 64);
 	else if (d == 'd')
 		mlx_put_image_to_window(v.mlx, v.win, v.p_d, i * 64, j * 64);
+}
+
+void	set_img_ground(t_vars v, int i, int j)
+{
+	mlx_put_image_to_window(v.mlx, v.win, v.ground, i * 64, j * 64);
+	if (j != v.map_info->hei - 1 && i != v.map_info->wid - 1)
+		mlx_put_image_to_window(v.mlx, v.win, v.ground_b, i * 64, j * 64);
 }

@@ -6,7 +6,7 @@
 #    By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 15:37:00 by joohekim          #+#    #+#              #
-#    Updated: 2023/02/17 18:49:50 by joohekim         ###   ########.fr        #
+#    Updated: 2023/02/17 19:15:25 by joohekim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADER_FLAGS = -Imlx/mlx.h -Ilibft/libft.h
 LDFLAGS = -L$(LIB_DIR) -L$(MLX_DIR)
 LIBS = -lft -lmlx
 
-NAME = a.out 
+NAME = so_long.out
 
 SRC_DIR = .
 SRCS = dfs.c main.c map_check.c map_make.c move_p.c print_msg.c  \
