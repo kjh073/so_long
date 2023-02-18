@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:53:53 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 18:24:32 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/19 02:58:01 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	print_err(char *str)
 {
 	ft_printf(str);
-	exit(0);
+	exit(1);
 }
 
 void	game_clear(void)

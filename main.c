@@ -6,7 +6,7 @@
 /*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:09:27 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/19 01:53:42 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/19 02:57:51 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(int ac, char **av)
 	{
 		vars.map_info = (t_map *)malloc(sizeof(t_map));
 		if (vars.map_info == NULL)
-			return (-1);
+			return (1);
 		if (make_map(&result, vars.map_info, av[1]) == -1)
-			return (-1);
+			return (1);
 		check_map(vars.map_info->map_check, vars.map_info, vars);
 		find_p(vars.map_info->map, vars.map_info);
 		find_e(vars.map_info->map, vars.map_info);
@@ -36,5 +36,5 @@ int	main(int ac, char **av)
 		mlx_loop(vars.mlx);
 		return (0);
 	}
-	return (-1);
+	return (1);
 }
