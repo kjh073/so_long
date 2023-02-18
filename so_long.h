@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:54:30 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 19:32:20 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/19 01:49:40 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	check_map_rect(char **map);
 void	check_map_surround_1(char **map);
 void	check_map_valid_comp(char **map);
 void	check_map_comp_count(char **map, t_map *map_info);
-void	check_map(char **map, t_map *map_info);
+void	check_map_max(t_vars vars);
+void	check_map(char **map, t_map *map_info, t_vars vars);
 char	*map_join(char *file_name);
 char	**map_split(char *map);
 void	move_w(t_vars v, t_map *m);

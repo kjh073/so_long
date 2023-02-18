@@ -6,7 +6,7 @@
 #    By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 15:37:00 by joohekim          #+#    #+#              #
-#    Updated: 2023/02/17 23:25:34 by jooheekim        ###   ########.fr        #
+#    Updated: 2023/02/19 01:52:50 by jooheekim        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ LIBS = -lft -lmlx
 NAME = so_long.out
 
 SRC_DIR = .
-SRCS = dfs.c main.c map_check.c map_make.c move_p.c print_msg.c  \
-	so_long_utils.c set_img.c mlx_hook.c
+SRCS = dfs.c main.c map_check1.c map_check2.c map_make.c move_p.c \
+	print_msg.c so_long_utils.c set_img.c mlx_hook.c
 
 OBJS = $(SRCS:.c=.o)
 
