@@ -6,7 +6,7 @@
 /*   By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:30:45 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/19 02:14:15 by jooheekim        ###   ########.fr       */
+/*   Updated: 2023/02/19 03:05:38 by jooheekim        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ void	check_map_comp_count(char **map, t_map *map_info)
 		print_err("Error\nMap has to have P = 1, E = 1, C >= 1.\n");
 }
 
-#include <stdio.h>
-
 void	check_map_max(t_vars vars)
 {
 	int	max_x;
@@ -105,7 +103,6 @@ void	check_map_max(t_vars vars)
 	max_x = 0;
 	max_y = 0;
 	mlx_get_screen_size(vars.mlx, &max_x, &max_y);
-	printf("max_x: %d, max_y: %d, x: %d, y: %d\n", max_x, max_y, vars.map_info->wid * 64, vars.map_info->hei * 64);
 	if (vars.map_info->wid * 64 > max_x || vars.map_info->hei * 64 > max_y - 53)
 		print_err("Error\nMap has to be smaller than screen size.\n");
 }
