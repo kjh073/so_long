@@ -6,11 +6,12 @@
 /*   By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 19:28:39 by joohekim          #+#    #+#             */
-/*   Updated: 2023/02/17 18:46:54 by joohekim         ###   ########.fr       */
+/*   Updated: 2023/02/19 14:35:10 by joohekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include <unistd.h>
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
 #include "so_long.h"
@@ -48,6 +49,7 @@ char	*map_join(char *file)
 			free(result);
 		result = temp;
 	}
+	close(fd);
 	return (result);
 }
 
