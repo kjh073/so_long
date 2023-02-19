@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jooheekim <jooheekim@student.42.fr>        +#+  +:+       +#+         #
+#    By: joohekim <joohekim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 15:37:00 by joohekim          #+#    #+#              #
-#    Updated: 2023/02/19 01:52:50 by jooheekim        ###   ########.fr        #
+#    Updated: 2023/02/19 18:33:21 by joohekim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADER_FLAGS = -Imlx/mlx.h -Ilibft/libft.h
 LDFLAGS = -L$(LIB_DIR) -L$(MLX_DIR)
 LIBS = -lft -lmlx
 
-NAME = so_long.out
+NAME = so_long
 
 SRC_DIR = .
 SRCS = dfs.c main.c map_check1.c map_check2.c map_make.c move_p.c \
